@@ -1,0 +1,14 @@
+.header {
+    flex: 0 0 auto;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    color: black;
+    padding: 0 3rem;
+}

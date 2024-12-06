@@ -1,24 +1,18 @@
 import "../styles/ProductListing.css";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { ProductsContext } from "../context/Productscontext";
+import { useContext } from "react";
 
 function ProductListing() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://quik-ecom.onrender.com/api/products")
-      .then((data) => setProducts(data.data));
-  }, []);
+  const { products = [] } = useContext(ProductsContext);
 
   return (
     <main className="main-content">
       <div className="productcard-container">
-        {products.length > 0 &&
-          products.map((product) => (
-            <div className="product-card">
+        {products.length > 0 ? (
+          products?.map((product, index) => (
+            <div className="product-card" key={index}>
               <div className="product-image">
-                <img src={product.images[0]} alt="sss" />
+                <img src={product.images[0]} alt={product.title} />
               </div>
               <div className="product-info p-4">
                 <p className="product-title">{product.title}</p>
@@ -34,7 +28,10 @@ function ProductListing() {
                 </button>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <p>No products available.</p>
+        )}
       </div>
     </main>
   );

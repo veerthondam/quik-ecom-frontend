@@ -3,13 +3,20 @@ import { ProductsContext } from "../context/Productscontext";
 import { useContext } from "react";
 
 function ProductListing() {
-  const { products = [] } = useContext(ProductsContext);
+  const { products = [], selectedCategory } = useContext(ProductsContext);
+
+  const filteredProducts = selectedCategory
+    ? products.filter(
+        (product) =>
+          product.category.toLowerCase() === selectedCategory.toLowerCase()
+      )
+    : products;
 
   return (
     <main className="main-content">
       <div className="productcard-container">
-        {products.length > 0 ? (
-          products?.map((product, index) => (
+        {filteredProducts.length > 0 ? (
+          filteredProducts?.map((product, index) => (
             <div className="product-card" key={index}>
               <div className="product-image">
                 <img src={product.images[0]} alt={product.title} />

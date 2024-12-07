@@ -3,8 +3,10 @@ import "../styles/Sidebar.css";
 import { ProductsContext } from "../context/Productscontext";
 
 function Sidebar() {
-  const { categories } = useContext(ProductsContext);
-  console.log(categories);
+  const { categories, selectCategory } = useContext(ProductsContext);
+  const handleCategoryClick = (category) => {
+    selectCategory(category);
+  };
 
   return (
     <div className="sidebar border-end p-3">
@@ -15,6 +17,7 @@ function Sidebar() {
               className="list-group-item list-group-item-action"
               aria-current="true"
               key={index}
+              onClick={() => handleCategoryClick(product.category)}
             >
               <div className="d-flex align-items-center gap-3">
                 <div className="img-thumbnail">

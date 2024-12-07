@@ -7,6 +7,7 @@ export const ProductsContext = createContext();
 export function ProductsProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     axios
@@ -33,8 +34,15 @@ export function ProductsProvider({ children }) {
       });
   }, []);
 
+  const selectCategory = (category) => {
+    console.log(category);
+    setSelectedCategory(category);
+  };
+
   return (
-    <ProductsContext.Provider value={{ products, categories }}>
+    <ProductsContext.Provider
+      value={{ products, categories, selectCategory, selectedCategory }}
+    >
       {children}
     </ProductsContext.Provider>
   );

@@ -1,10 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import "../styles/Sidebar.css";
 import { ProductsContext } from "../context/Productscontext";
 
 function Sidebar() {
   const { categories, selectCategory, selectedCategory } =
     useContext(ProductsContext);
+
+  useEffect(() => {
+    if (!selectedCategory && categories.length > 0) {
+      selectCategory(categories[0].category);
+    }
+  }, [categories, selectCategory, selectedCategory]);
+
   const handleCategoryClick = (category) => {
     selectCategory(category);
   };
@@ -24,13 +31,9 @@ function Sidebar() {
             >
               <div className="d-flex align-items-center gap-3">
                 <div className="img-thumbnail">
-                  <img
-                    className=""
-                    src={product.images}
-                    alt={product.category}
-                  />
+                  <img src={product.images} alt={product.category} />
                 </div>
-                <div>{product.category}</div>
+                <div className="d-none d-lg-block">{product.category}</div>
               </div>
             </li>
           ))}

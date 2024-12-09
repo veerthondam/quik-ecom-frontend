@@ -35,7 +35,6 @@ export function ProductsProvider({ children }) {
   }, []);
 
   const selectCategory = (category) => {
-    console.log(category);
     setSelectedCategory(category);
   };
 

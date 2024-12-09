@@ -3,7 +3,8 @@ import "../styles/Sidebar.css";
 import { ProductsContext } from "../context/Productscontext";
 
 function Sidebar() {
-  const { categories, selectCategory } = useContext(ProductsContext);
+  const { categories, selectCategory, selectedCategory } =
+    useContext(ProductsContext);
   const handleCategoryClick = (category) => {
     selectCategory(category);
   };
@@ -14,7 +15,9 @@ function Sidebar() {
         <ul className="list-group list-group-flush">
           {categories.map((product, index) => (
             <li
-              className="list-group-item list-group-item-action"
+              className={`list-group-item list-group-item-action ${
+                selectedCategory === product.category ? "active" : ""
+              }`}
               aria-current="true"
               key={index}
               onClick={() => handleCategoryClick(product.category)}
